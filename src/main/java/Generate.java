@@ -32,4 +32,16 @@ public class Generate {
             System.out.println("exceptio" + ex.getMessage());
         }
     }
+    public void secodnGent(){
+        MethodSpec greetCustomer = MethodSpec.methodBuilder("greetCustomer").addModifiers(Modifier.PUBLIC).returns(String.class).addParameter(String.class, "name")
+                .addStatement("return $S+$N", "Welcome, ", "name").build();
+        TypeSpec customerService = TypeSpec.classBuilder("CustomerService").addModifiers(Modifier.PUBLIC).addMethod(greetCustomer).build();
+        JavaFile javaFile = JavaFile.builder("com.hascode.tutorial", customerService).build();
+        try {
+            javaFile.writeTo(Paths.get("./src/main/java"));
+        }
+        catch (IOException ex){
+            System.out.println("exceptio" + ex.getMessage());
+        }
+    }
 }
